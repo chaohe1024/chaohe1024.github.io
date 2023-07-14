@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+        img {
+            height: 66.67vh;
+            object-fit: contain;
+            margin-bottom: 20px;
+        }
+        .button-container {
+            display: flex;
+            gap: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+        }
+        #button-a {
+            background-color: #f44336;
+        }
+        #button-b {
+            background-color: #4caf50;
+        }
+        #button-c {
+            background-color: #008cba;
+        }
+        #button-d {
+            background-color: #fcb43e;
+        }
+    </style>
+</head>
+<body>
+    <img id="image" src="cv_img1.jpg">
+    <div class="button-container">
+        <button id="button-a">A</button>
+        <button id="button-b">B</button>
+        <button id="button-c">C</button>
+        <button id="button-d">D</button>
+    </div>
+
+    <script>
+        const images = ["cv_img1.jpg", "cv_img2.jpg", "cv_img3.jpg", "cv_img4.jpg", "cv_img5.jpg", "cv_img6.jpg"];
+        let index = 0;
+
+        function changeImage() {
+            index = (index + 1) % images.length;
+            document.getElementById("image").src = images[index];
+        }
+
+        setInterval(changeImage, 5000); // Change image every 5 seconds
+    </script>
+</body>
+</html>
