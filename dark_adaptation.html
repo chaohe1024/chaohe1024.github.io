@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        #cross {
+            position: absolute;
+            width: 1px;
+            height: 7.5px; /* Reduced height */
+            background-color: white;
+            opacity: 0;
+            transition: opacity 1s linear;
+        }
+        #cross::before {
+            content: "";
+            position: absolute;
+            width: 7.5px; /* Reduced width */
+            height: 1px;
+            background-color: white;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #spot {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 1s linear;
+            top: 75%;
+            left: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="cross"></div>
+    <div id="spot"></div>
+
+    <script>
+        const cross = document.getElementById('cross');
+        const spot = document.getElementById('spot');
+
+        function flashBackground() {
+            document.body.style.backgroundColor = 'white';
+            setTimeout(() => {
+                document.body.style.backgroundColor = 'black';
+            }, 1000);
+        }
+
+        function showCross() {
+            cross.style.opacity = '1';
+        }
+
+        function toggleSpot() {
+            if (Math.random() > 0.5) {
+                spot.style.opacity = '1';
+            } else {
+                spot.style.opacity = '0';
+            }
+        }
+
+        setTimeout(flashBackground, 5000); // Flash background after 5 seconds
+        setTimeout(showCross, 7000); // Show cross 2 seconds after background flash
+        setInterval(toggleSpot, 3000); // Toggle spot visibility every 3 seconds
+    </script>
+</body>
+</html>
