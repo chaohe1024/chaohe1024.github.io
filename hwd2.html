@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #white-spot::before,
+        #white-spot::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 1px;
+            background-color: white;
+            left: 50%;
+            top: 50%;
+        }
+
+        #white-spot::before {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+
+        #white-spot::after {
+            transform: translate(-50%, -50%);
+        }
+
+
+    
+        #black-spot {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0s;
+            animation: flash 1s infinite;
+        }
+
+        @keyframes flash {
+            0% {opacity: 1;}
+            50% {opacity: 0;}
+            100% {opacity: 1;}
+        }
+
+    </style>
+</head>
+<body>
+    <div id="white-spot"></div>
+    <div id="black-spot"></div>
+
+    <script>
+        const blackSpot = document.getElementById('black-spot');
+        const whiteSpot = document.getElementById('white-spot');
+        let screenHeight = window.innerHeight;
+        let fovDistance = screenHeight;
+
+        let fovs = [
+            1/8,
+            2/8,
+            3/8,
+            4/8
+        ]
+
+        let index = 0;
+        let fovIndex = 0;
+
+        function moveSpot() {
+            // set positions
+            fovDistance = screenHeight * fovs[fovIndex];
+            let positions = [
+            `translate(0px, -${fovDistance}px)`,
+            `translate(${fovDistance}px, 0px)`,
+            `translate(0px, ${fovDistance}px)`,
+            `translate(-${fovDistance}px, 0px)`
+            ];
+    
+            // Set the new position
+            blackSpot.style.transform = positions[index];
+            // Make the black spot visible
+            blackSpot.style.visibility = "visible"; 
+            // Remove the animation, if it's there
+            blackSpot.style.animation = "none";
+            // Force a reflow, which is needed to restart a CSS animation
+            void blackSpot.offsetWidth;
+            // Start flashing
+            blackSpot.style.animation = "flash 1s 3";
+            // Stop flashing the white spot
+            whiteSpot.style.animation = "";
+    
+            // After 3 seconds, hide the black spot and start flashing the white spot
+            setTimeout(() => {
+                blackSpot.style.visibility = "hidden";
+                whiteSpot.style.animation = "none";
+                void whiteSpot.offsetWidth;
+                whiteSpot.style.animation = "flash 1s 3";
+            }, 3000);
+            
+            // fovIndex ++
+            if (index === positions.length - 1) {
+                fovIndex = (fovIndex + 1) % fovs.length;
+            }    
+    
+            // Update the position index for the next move
+            index = (index + 1) % positions.length;
+            // Wait for 6 seconds before moving again
+            setTimeout(moveSpot, 6000);
+        }
+    
+        // Start moving the spot
+        moveSpot();
+    </script>
+    
+    
+    
+
+</body>
+</html>
