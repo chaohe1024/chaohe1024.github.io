@@ -2,24 +2,32 @@
 <html>
 <head>
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             background-color: #f4f4f4;
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            padding: 0;
         }
+
         .container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             grid-gap: 20px;
-            width: 80%;
-            max-width: 800px;
-            min-height: 50vh;
+            height: 50%;
+            width: 40%;
+            max-height: calc(80vh - 40px); /* Subtracting margin from the container height */
+            max-width: calc(80vh - 40px); /* Subtracting margin from the container width */
+            align-content: center;
+            justify-content: center;
         }
+
         .box {
             border-radius: 10px;
             text-align: center;
@@ -30,13 +38,16 @@
             color: #333;
             text-decoration: none;
         }
+
         .box img {
             width: 100%;
             border-radius: 5px;
         }
+
         .box h2 {
             font-size: 1.2em;
         }
+
         .box:hover {
             box-shadow: 0px 12px 24px 0px rgba(0,0,0,0.2);
         }
@@ -44,22 +55,30 @@
 </head>
 <body>
     <div class="container">
-        <a href="visual_field.html" class="box">
-            <img src="visual_field.png" alt="视野">
-            <h2>视野</h2>
-        </a>
-        <a href="color_vision.html" class="box">
-            <img src="color_vision.png" alt="色觉">
-            <h2>色觉</h2>
-        </a>
-        <a href="contrast_sensitivity.html" class="box">
-            <img src="contrast_sensitivity.png" alt="对比敏感度">
-            <h2>对比敏感度</h2>
-        </a>
-        <a href="dark_adaptation.html" class="box">
-            <img src="dark_adaptation.png" alt="暗适应">
-            <h2>暗适应</h2>
-        </a>
+        <div class="box">
+            <a href="visual_field.html">
+                <img src="visual_field.png" alt="视野">
+                <h2>视野</h2>
+            </a>
+        </div>
+        <div class="box">
+            <a href="color_vision.html">
+                <img src="color_vision.png" alt="色觉">
+                <h2>色觉</h2>
+            </a>
+        </div>
+        <div class="box">
+            <a href="contrast_sensitivity.html">
+                <img src="contrast_sensitivity.png" alt="对比敏感度">
+                <h2>对比敏感度</h2>
+            </a>
+        </div>
+        <div class="box">
+            <a href="dark_adaptation.html">
+                <img src="dark_adaptation.png" alt="暗适应">
+                <h2>暗适应</h2>
+            </a>
+        </div>
     </div>
 </body>
 </html>
