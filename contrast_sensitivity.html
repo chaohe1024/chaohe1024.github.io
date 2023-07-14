@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            font-family: Arial, sans-serif;
+        }
+        #wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50vh;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        #letter {
+            font-size: 0.5em;
+            font-weight: bold;
+            transition: color 5s linear;
+            z-index: 1;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 50%;
+            color: black;
+            position: absolute;
+            cursor: pointer;
+            width: 2em;
+            height: 2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #button-left {
+            left: 0;
+        }
+        #button-top {
+            top: 0;
+        }
+        #button-right {
+            right: 0;
+        }
+        #button-bottom {
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="letter">E</div>
+        <button id="button-left">&larr;</button>
+        <button id="button-top">&uarr;</button>
+        <button id="button-right">&rarr;</button>
+        <button id="button-bottom">&darr;</button>
+    </div>
+
+    <script>
+        const letter = document.getElementById('letter');
+        const rotations = ['0deg', '90deg', '180deg', '270deg'];
+        let rotationIndex = 0;
+        let colorStep = 0;
+
+        function changeLetter() {
+            rotationIndex = (rotationIndex + 1) % rotations.length;
+            const rotation = rotations[rotationIndex];
+            letter.style.transform = `rotate(${rotation})`;
+
+            colorStep = Math.min(colorStep + 1, 16);
+            const colorValue = Math.round(colorStep * 255 / 16);
+            letter.style.color = `rgb(${colorValue}, ${colorValue}, ${colorValue})`;
+        }
+
+        setInterval(changeLetter, 5000); // Change letter every 5 seconds
+    </script>
+</body>
+</html>
