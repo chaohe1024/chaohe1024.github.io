@@ -49,11 +49,20 @@
             100% {opacity: 1;}
         }
 
+        #ring {
+            width: 10px;
+            height: 10px;
+            background-color: black;
+            border-radius: 50%;
+            border: 3px solid rgb(32, 32, 32);
+        }
+
     </style>
 </head>
 <body>
     <div id="white-spot"></div>
     <div id="black-spot"></div>
+    <div id="ring"></div>
 
     <script>
         const blackSpot = document.getElementById('black-spot');
@@ -113,6 +122,43 @@
             setTimeout(moveSpot, 6000);
         }
     
+        function updateRingPosition() {
+            const gazeX = 300;
+            const gazeY = 360;
+
+
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+            
+
+            const ring = document.getElementById('ring');
+
+            ring.style.position = 'absolute';
+
+            //circle.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+
+
+            fetch('http://localhost:5000/')
+                .then(response => response.json())
+                .then(data => {
+                    const gazeX = data.GazeX;
+                    const gazeY = data.GazeY;
+
+                    //const gazeX = 500;
+                    //const gazeY = 200;
+
+                    const ring = document.getElementById('ring');
+                    ring.style.left = gazeX * screenWidth / 1280 - 10 + 'px';
+                    ring.style.top = gazeY * screenHeight /720 - 10 + 'px';
+
+                    console.log(ring.style.left);
+                    console.log(ring.style.top);
+
+                });
+        }
+        
+        // Update Ring position every 1 second
+        setInterval(updateRingPosition, 1000);
         // Start moving the spot
         moveSpot();
     </script>
